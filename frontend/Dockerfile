@@ -13,5 +13,7 @@ COPY . .
 # Exposer le port utilisé par l'application
 EXPOSE 3000
 
+RUN npm run build
+
 # Lancer l'application
 CMD ["npm", "start"]

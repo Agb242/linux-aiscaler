@@ -30,7 +30,7 @@ jobs:
       - name: Run Docker build and deploy on GCP
       - run: |
           ssh user@your-gcp-ip << 'EOF'
-            cd /home/your-user/repository
+            cd /home/aiscaler
             
             # Build Docker images for frontend and backend
             docker build -t backend -f backend/Dockerfile .
