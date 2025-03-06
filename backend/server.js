@@ -15,7 +15,7 @@ wss.on("connection", async (ws) => {
     console.log("Nouvelle connexion WebSocket");
 
     try {
-        // Création du conteneur Ubuntu pour chaque utilisateur
+        // Création du conteneur Ubuntu pour chaque utilisateur aiscaler
         const container = await docker.createContainer({
             Image: "ubuntu",
             Cmd: ["/bin/bash"],
