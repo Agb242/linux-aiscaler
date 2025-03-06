@@ -16,7 +16,7 @@ jobs:
       - name: Set up SSH for GCP
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Copy repo to GCP instance
         run: |
