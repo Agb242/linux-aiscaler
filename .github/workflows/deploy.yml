@@ -32,20 +32,13 @@ jobs:
           ssh user@your-gcp-ip << 'EOF'
             # create network
             docker network create webnet
-
             cd /home/aiscaler/backend
             docker build -t backend .
-            docker run -d --name backend --network webnet -p 8080:8080 backend
-            
-           
+            docker run -d --name backend --network webnet -p 8080:8080 backend         
             cd /home/aiscaler/frontend
             docker build -t frontend .
             docker run -d --name frontend --network webnet -p 3000:3000 frontend
-
-            
-
             # Build Docker images for frontend and backend et Run the containers (en arrière-plan)
             docker run -d --name nginx --network webnet -p 80:80 -p 443:443 nginx
-        
             # Server Web
           EOF
