@@ -1,1 +1,4 @@
 /terraform/
+.gitattributes
+.gitignore
+node_modules
