@@ -48,7 +48,7 @@ wss.on("connection", async (ws) => {
             ws.send(data.toString());
         });
 
-        // Transmettre l'entrée du client vers le conteneur
+        // Transmettre l'entrée du client vers le conteneur sur gcp
         ws.on("message", (message) => {
             stream.write(message);
         });
