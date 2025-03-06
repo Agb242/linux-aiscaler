@@ -75,7 +75,7 @@ resource "google_compute_instance" "ubuntu_container" {
   }
 
   # Nous n'ajoutons pas la clé SSH dans les métadonnées de l'instance
-  # car elle est déjà définie au niveau du projet via google_compute_project_metadata.ssh_keys.
+  # car elle est déjà définie  au niveau du projet via google_compute_project_metadata.ssh_keys.
   metadata = {
     "gce-container-declaration" = <<-EOF
       spec:

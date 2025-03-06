@@ -1,0 +1,38 @@
+name: Build and Deploy Docker Images to GCP Instance
+
+on:
+  push:
+    branches:
+      - main   # Déclenche l'action à chaque push sur la branche 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest   # Utilise une machine Ubuntu pour le workflow
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Set up SSH for GCP
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.GCP_SSH_KEY }}
+
+      - name: Copy repo to GCP instance
+        run: |
+          scp -r . aiscaler@34.72.172.138:/home/aiscaler
+
+      - name: Run Docker build and deploy on GCP
+        run: |
+          ssh aiscaler@34.72.172.138 << 'EOF'
+            cd /home/aiscaler
+            
+            # Build Docker images for frontend and backend
+            docker build -t backend -f backend/Dockerfile .
+            docker build -t frontend -f frontend/Dockerfile .
+            
+            # Run the containers (en arrière-plan)
+            docker run -d -p 8080:8080 backend
+            docker run -d -p 3000:3000 frontend
+          EOF
+
