@@ -27,11 +27,16 @@ jobs:
         run: |
           scp -r . aiscaler@34.72.172.138:/home/aiscaler
 
-      - name: Run Docker Compose on GCP
-        run: |
-          ssh aiscaler@34.72.172.138 << 'EOF'
-            cd /home/aiscaler
-
-            # Lancer les services avec Docker Compose
-            docker-compose up --build -d
+      - name: Run Docker build and deploy on GCP
+      - run: |
+          ssh user@your-gcp-ip << 'EOF'
+            cd /home/your-user/repository
+            
+            # Build Docker images for frontend and backend
+            docker build -t backend -f backend/Dockerfile .
+            docker build -t frontend -f frontend/Dockerfile .
+            
+            # Run the containers (en arrière-plan)
+            docker run -d -p 8080:8080 backend
+            docker run -d -p 80:80 frontend
           EOF
